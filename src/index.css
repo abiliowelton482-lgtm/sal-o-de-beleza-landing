@@ -177,8 +177,9 @@ img {
 }
 
 .nexus-marker__wrap.is-active .nexus-marker__logo {
-  background: #ec4899;
-  border-color: #ffffff;
+  background: #ffffff;
+  border-color: #ec4899;
+  transform: scale(1.1);
   box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.25), 0 8px 24px rgba(236, 72, 153, 0.45);
 }
 

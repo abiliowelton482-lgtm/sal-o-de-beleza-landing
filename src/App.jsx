@@ -7,7 +7,7 @@ import {
   User, 
   MessageCircle, 
   ArrowRight, 
-  Sparkles, 
+  ArrowUp,
   Droplets, 
   Check, 
   ShoppingBag,
@@ -246,6 +246,7 @@ export default function SalaoBelezaLandingPage() {
   const [quantities, setQuantities] = useState({});
   const [activeProductModal, setActiveProductModal] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   const getQuantity = (id) => quantities[id] || 1;
   const updateQuantity = (id, delta) => {
@@ -302,6 +303,7 @@ export default function SalaoBelezaLandingPage() {
           if (heroRef.current) {
             heroRef.current.style.opacity = String(1 - fadeProgress);
           }
+          setShowScrollTop(scrollY > 150);
           ticking = false;
         });
         ticking = true;
@@ -415,16 +417,12 @@ export default function SalaoBelezaLandingPage() {
         <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-gray-100 px-5 sm:px-6 lg:px-20 py-3.5 sm:py-4 transition-all">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             {/* Logo NEXUS Beauty */}
-            <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              <div className="w-10 h-10 rounded-xl bg-pink-50 border border-pink-100 flex items-center justify-center text-pink-500 shadow-sm">
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-extrabold text-lg tracking-wider text-gray-900 flex items-center gap-1.5 font-sans leading-none">
-                  NEXUS <span className="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
-                </span>
-                <span className="text-[10px] text-gray-500 uppercase tracking-[0.25em] font-semibold mt-1">Beauty Studio</span>
-              </div>
+            <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <img
+                src="/logo-nexus.png"
+                alt="Nexus Beauty Studio"
+                className="h-10 sm:h-12 w-auto object-contain select-none"
+              />
             </div>
 
             {/* Menu Links */}
@@ -534,7 +532,7 @@ export default function SalaoBelezaLandingPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { title: 'Mechas & Iluminação', desc: 'Loiros, morenas iluminadas e correção de cor com proteção estrutural.', icon: <Sparkles className="w-6 h-6" /> },
+                { title: 'Mechas & Iluminação', desc: 'Loiros, morenas iluminadas e correção de cor com proteção estrutural.', icon: <img src="/logo-icon.png" alt="Nexus" className="w-7 h-7 object-contain" /> },
                 { title: 'Corte & Visagismo', desc: 'Design que valoriza o formato do seu rosto e expressa sua personalidade.', icon: <Scissors className="w-6 h-6" /> },
                 { title: 'Terapia Capilar', desc: 'Tratamentos profundos para saúde do couro cabeludo e fios radiantes.', icon: <Droplets className="w-6 h-6" /> },
                 { title: 'Nail Bar & Spa', desc: 'Esmaltação em gel, alongamentos e spa para mãos e pés.', icon: <Star className="w-6 h-6" /> }
@@ -582,7 +580,7 @@ export default function SalaoBelezaLandingPage() {
                   {/* Serviços */}
                   <div className="flex flex-col gap-3">
                     <h4 className="text-gray-900 text-sm font-bold flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-pink-500" /> 1. Escolha o serviço
+                      <img src="/logo-icon.png" alt="Nexus" className="w-5 h-5 object-contain" /> 1. Escolha o serviço
                     </h4>
                     <div className="flex flex-col gap-2.5">
                       {SERVICES.map((serv) => (
@@ -906,37 +904,57 @@ export default function SalaoBelezaLandingPage() {
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">Inspiração & Transformações</h2>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 h-auto md:h-[440px]">
-              <div className="col-span-2 row-span-2 rounded-3xl overflow-hidden group relative h-[260px] md:h-auto shadow-md border border-gray-100">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 h-auto md:h-[460px]">
+              {/* Foto 1: Espaço do Salão em Cores Reais */}
+              <div className="col-span-2 row-span-2 rounded-3xl overflow-hidden group relative h-[280px] md:h-auto shadow-md border border-gray-100">
                 <img
-                  src="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=900&auto=format&fit=crop"
-                  alt="Ambiente Nexus Beauty Studio"
+                  src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?q=85&w=1000&auto=format&fit=crop"
+                  alt="Ambiente moderno do Nexus Beauty Studio"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-transparent to-transparent flex items-end p-6">
-                  <span className="text-white font-bold text-lg">Ambiente Acolhedor & Sofisticado</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/75 via-gray-900/15 to-transparent flex flex-col justify-end p-6">
+                  <span className="text-[11px] font-bold text-pink-300 uppercase tracking-widest">Nosso Espaço</span>
+                  <span className="text-white font-bold text-lg sm:text-xl">Ambiente Acolhedor & Sofisticado</span>
                 </div>
               </div>
-              <div className="rounded-3xl overflow-hidden group relative h-[180px] md:h-auto shadow-md border border-gray-100">
+
+              {/* Foto 2: Procedimento de Escova & Finalização */}
+              <div className="rounded-3xl overflow-hidden group relative h-[200px] md:h-auto shadow-md border border-gray-100">
                 <img
-                  src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600&auto=format&fit=crop"
-                  alt="Mechas e Iluminação"
+                  src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=85&w=800&auto=format&fit=crop"
+                  alt="Procedimento de escova e finalização capilar"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/75 via-transparent to-transparent flex flex-col justify-end p-4">
+                  <span className="text-[10px] font-bold text-pink-300 uppercase tracking-wider">Cabelo</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">Corte, Escova & Visagismo</span>
+                </div>
               </div>
-              <div className="rounded-3xl overflow-hidden group relative h-[180px] md:h-auto shadow-md border border-gray-100">
+
+              {/* Foto 3: Lavatório & Spa Capilar */}
+              <div className="rounded-3xl overflow-hidden group relative h-[200px] md:h-auto shadow-md border border-gray-100">
                 <img
-                  src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=600&auto=format&fit=crop"
-                  alt="Visagismo e Penteados"
+                  src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=85&w=800&auto=format&fit=crop"
+                  alt="Lavatório e terapia capilar relaxante"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/75 via-transparent to-transparent flex flex-col justify-end p-4">
+                  <span className="text-[10px] font-bold text-pink-300 uppercase tracking-wider">Tratamento</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">Spa Capilar & Nutrição</span>
+                </div>
               </div>
-              <div className="col-span-2 rounded-3xl overflow-hidden group relative h-[180px] md:h-auto shadow-md border border-gray-100">
+
+              {/* Foto 4: Procedimento de Manicure & Nail Designer */}
+              <div className="col-span-2 rounded-3xl overflow-hidden group relative h-[200px] md:h-auto shadow-md border border-gray-100">
                 <img
-                  src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=900&auto=format&fit=crop"
-                  alt="Cuidado Capilar e Spa"
+                  src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?q=85&w=1000&auto=format&fit=crop"
+                  alt="Procedimento profissional de manicure e alongamento em gel"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/75 via-transparent to-transparent flex flex-col justify-end p-5">
+                  <span className="text-[10px] font-bold text-pink-300 uppercase tracking-wider">Nail Bar & Spa</span>
+                  <span className="text-white font-bold text-sm sm:text-base">Manicure, Pedicure & Alongamento em Gel</span>
+                </div>
               </div>
             </div>
           </div>
@@ -950,14 +968,33 @@ export default function SalaoBelezaLandingPage() {
         {/* Footer Minimalista */}
         <footer className="border-t border-gray-200 py-10 px-6 lg:px-20 bg-white text-gray-500 text-xs text-center md:text-left">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 font-bold text-gray-900">
-              <Sparkles className="w-4 h-4 text-pink-500" /> NEXUS Beauty Studio
+            <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <img src="/logo-nexus.png" alt="Nexus Beauty Studio" className="h-9 w-auto object-contain select-none" />
             </div>
             <p>© {CURRENT_YEAR} Todos os direitos reservados.</p>
           </div>
         </footer>
 
       </div>
+
+      {/* Botão Flutuante Voltar ao Topo (z-[9999] para ficar acima do mapa e de todas as seções) */}
+      <button
+        type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Voltar ao topo da página"
+        title="Voltar ao topo"
+        className={`fixed bottom-6 right-6 z-[9999] bg-gray-900 hover:bg-pink-500 text-white font-bold px-4 py-3 rounded-full flex items-center gap-2 shadow-xl shadow-pink-500/20 border border-white/15 transition-all duration-300 cursor-pointer ${
+          showScrollTop
+            ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto hover:scale-105'
+            : 'opacity-0 translate-y-6 scale-90 pointer-events-none'
+        }`}
+      >
+        <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center p-0.5 shrink-0">
+          <img src="/logo-icon.png" alt="" className="w-full h-full object-contain" />
+        </div>
+        <span className="text-xs tracking-wide">Topo</span>
+        <ArrowUp className="w-4 h-4" />
+      </button>
     </div>
   );
 }
