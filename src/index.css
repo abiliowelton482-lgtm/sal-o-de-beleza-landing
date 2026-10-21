@@ -1,0 +1,219 @@
+@import 'tailwindcss';
+
+:root {
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #374151;
+  background-color: #fafafa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #fafafa;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ===== Animações Delicadas de Fundo (Aura, Seda & Partículas) ===== */
+@keyframes floatOrbSlow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(45px, -35px, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-30px, 25px, 0) scale(0.95);
+  }
+}
+
+@keyframes floatOrbReverse {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-55px, 40px, 0) scale(1.1);
+  }
+}
+
+@keyframes floatParticleUp {
+  0% {
+    transform: translate3d(0, 105vh, 0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: var(--p-opacity, 0.45);
+  }
+  85% {
+    opacity: var(--p-opacity, 0.45);
+  }
+  100% {
+    transform: translate3d(var(--p-drift, 60px), -12vh, 0) rotate(360deg) scale(1.15);
+    opacity: 0;
+  }
+}
+
+@keyframes silkSway {
+  0%, 100% {
+    transform: translateX(0) translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-25px) translateY(12px) scaleY(1.06);
+  }
+}
+
+.animate-orb-slow {
+  animation: floatOrbSlow 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-orb-reverse {
+  animation: floatOrbReverse 25s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-silk-sway {
+  animation: silkSway 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+.floating-particle {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  animation: floatParticleUp var(--p-duration, 22s) linear infinite;
+  animation-delay: var(--p-delay, 0s);
+  will-change: transform, opacity;
+}
+
+/* ===== Mapa de unidades (Leaflet Light & Clean) ===== */
+.leaflet-container {
+  background: #f9fafb;
+  font-family: inherit;
+}
+
+.leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.85) !important;
+  color: #6b7280 !important;
+  font-size: 9px !important;
+}
+
+.leaflet-control-attribution a {
+  color: #ec4899 !important;
+}
+
+.leaflet-bar a {
+  background: #ffffff !important;
+  color: #ec4899 !important;
+  border-color: #f3f4f6 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.leaflet-bar a:hover {
+  background: #fdf2f8 !important;
+}
+
+.nexus-marker {
+  background: transparent;
+  border: none;
+}
+
+.nexus-marker__wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: transform 0.2s ease;
+}
+
+.nexus-marker__wrap:hover {
+  transform: translateY(-3px);
+}
+
+.nexus-marker__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 2px solid #f9a8d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.2);
+}
+
+.nexus-marker__badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: #111827;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #fbcfe8;
+  padding: 2px 7px;
+  border-radius: 8px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.nexus-marker__wrap.is-active .nexus-marker__logo {
+  background: #ec4899;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.25), 0 8px 24px rgba(236, 72, 153, 0.45);
+}
+
+.nexus-marker__wrap.is-active .nexus-marker__badge {
+  color: #ffffff;
+  background: #ec4899;
+  border-color: #ec4899;
+}
+
+.nexus-origin__dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 5px solid #ec4899;
+  box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.5);
+  animation: nexusPulse 2s infinite;
+}
+
+@keyframes nexusPulse {
+  0% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.5); }
+  70% { box-shadow: 0 0 0 16px rgba(236, 72, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0); }
+}
+
+.nexus-route {
+  filter: drop-shadow(0 2px 6px rgba(236, 72, 153, 0.45));
+}
+
+.nexus-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nexus-scroll::-webkit-scrollbar-thumb {
+  background: rgba(236, 72, 153, 0.25);
+  border-radius: 9999px;
+}
+
